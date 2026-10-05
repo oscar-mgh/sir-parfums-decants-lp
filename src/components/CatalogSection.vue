@@ -84,6 +84,15 @@ const perfumes: Perfume[] = [
     priceFrom: 165,
     image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&auto=format&fit=crop&q=60',
   },
+  {
+    id: 9,
+    name: 'Y EDP',
+    brand: 'Yves Saint Laurent',
+    category: 'Diseñador',
+    notes: 'Manzana, Jengibre, Salvia, Habatonka',
+    priceFrom: 165,
+    image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&auto=format&fit=crop&q=60',
+  },
 ];
 
 const selectedCategory = ref<'Todos' | 'Diseñador' | 'Nicho' | 'Árabe'>('Todos');
@@ -139,10 +148,8 @@ function sendWhatsAppRequest(perfume: Perfume) {
 
 <template>
   <div>
-    <!-- Contenedor Principal de Filtros (Ancho Completo y Centrado) -->
-    <div class="mb-8 flex w-full flex-col items-center justify-center gap-4 text-center sm:flex-row sm:justify-between">
-      <!-- Botones de Categorías: Forzados al centro con w-full, justify-center y mx-auto -->
-      <div class="flex w-full flex-wrap items-center justify-center gap-2 mx-auto sm:w-auto">
+    <div class="mb-8 flex w-full flex-col items-center justify-center gap-4 text-center sm:flex-row sm:justify-between lg:justify-start">
+      <div class="mx-auto flex w-full flex-wrap items-center justify-center gap-2 sm:w-auto lg:mx-0">
         <button
           v-for="cat in ['Todos', 'Diseñador', 'Nicho', 'Árabe'] as const"
           :key="cat"
@@ -160,17 +167,16 @@ function sendWhatsAppRequest(perfume: Perfume) {
       <!-- Botón Volver al inicio: Centrado -->
       <a
         href="/"
-        class="inline-flex items-center justify-center cursor-pointer rounded border border-neutral-800 bg-neutral-900/80 px-4 py-2 text-xs font-bold text-neutral-400 transition-colors duration-200 hover:border-orange-500 hover:text-orange-400">
+        class="inline-flex cursor-pointer items-center justify-center rounded border border-neutral-800 bg-neutral-900/80 px-4 py-2 text-xs font-bold text-neutral-400 transition-colors duration-200 hover:border-orange-500 hover:text-orange-400 lg:ml-auto">
         Volver al inicio
       </a>
     </div>
 
-    <!-- Resto del componente (Grid de Tarjetas) -->
     <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
       <div
         v-for="perfume in paginatedPerfumes"
         :key="perfume.id"
-        class="group flex min-h-[21rem] min-w-0 flex-col overflow-hidden rounded-lg border border-neutral-800/80 bg-neutral-900/40 p-3 transition-colors duration-200 hover:border-orange-500/40 hover:bg-neutral-900/80">
+        class="group flex h-[240px] max-h-[240px] min-w-0 flex-col overflow-hidden rounded-lg border border-neutral-800/80 bg-neutral-900/40 p-3 transition-colors duration-200 hover:border-orange-500/40 hover:bg-neutral-900/80">
         <div class="flex min-h-0 flex-1 flex-col">
           <div class="relative min-h-0 flex-1 overflow-hidden rounded bg-neutral-950 flex items-center justify-center">
             <img
