@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import WhatsAppContact from '../components/WhatsAppContact.vue';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Sir Parfums Decants | Fragancias 100% Originales',
+  description = 'Descubre y experimenta perfumes originales en formato decant antes de comprar la botella completa.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html
+  lang="es"
+  class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content={description}
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased min-h-screen flex flex-col selection:bg-orange-500 selection:text-neutral-950">
+    <main class="grow">
+      <slot />
+    </main>
+    <WhatsAppContact client:load />
+  </body>
+</html>
