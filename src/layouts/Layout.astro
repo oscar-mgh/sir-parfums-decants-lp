@@ -5,12 +5,31 @@ import WhatsAppContact from '../components/WhatsAppContact.vue';
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
 const {
-  title = 'Sir Parfums Decants | Fragancias 100% Originales',
-  description = 'Descubre y experimenta perfumes originales en formato decant antes de comprar la botella completa.',
+  title = 'Sir Parfums | Decants de Perfumes 100% Originales',
+  description = 'Descubre y prueba perfumes originales y fragancias de nicho en formato decant de 5ml y 10ml antes de comprar la botella completa en Sir Parfums.',
+  keywords = 'Sir Parfums, decants de perfumes, perfumes originales, muestras de perfumes, perfumería de nicho, comprar decants, fragancias masculinas y unisex',
+  image = '/og-sir-parfums.jpg',
+  canonicalURL = Astro.url.href,
 } = Astro.props;
+
+// Estructura de Datos (Schema.org) para potenciar la marca personal en Google
+const baseUrl = import.meta.env.PUBLIC_SITE_URL || Astro.url.origin;
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'OnlineStore',
+  name: 'Sir Parfums',
+  description: description,
+  url: baseUrl,
+  logo: new URL('/favicon.ico', baseUrl).href,
+  sameAs: ['https://instagram.com/sirparfums', 'https://tiktok.com/@sirparfums'],
+};
 ---
 
 <!doctype html>
@@ -23,16 +42,84 @@ const {
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/favicon.ico"
+    />
+    <link
+      rel="canonical"
+      href={canonicalURL}
+    />
+
+    <!-- Meta Tags Básicos -->
+    <title>{title}</title>
     <meta
       name="description"
       content={description}
     />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
+    <meta
+      name="keywords"
+      content={keywords}
     />
-    <title>{title}</title>
+    <meta
+      name="author"
+      content="Sir Parfums"
+    />
+    <meta
+      name="robots"
+      content="index, follow"
+    />
+
+    <!-- Open Graph / Facebook & WhatsApp -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:url"
+      content={canonicalURL}
+    />
+    <meta
+      property="og:title"
+      content={title}
+    />
+    <meta
+      property="og:description"
+      content={description}
+    />
+    <meta
+      property="og:image"
+      content={new URL(image, Astro.url)}
+    />
+    <meta
+      property="og:site_name"
+      content="Sir Parfums"
+    />
+
+    <!-- Twitter Cards -->
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      name="twitter:title"
+      content={title}
+    />
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+    <meta
+      name="twitter:image"
+      content={new URL(image, Astro.url)}
+    />
+
+    <!-- Schema JSON-LD -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schemaData)}
+    />
   </head>
   <body class="bg-neutral-950 text-neutral-100 antialiased min-h-screen flex flex-col selection:bg-orange-500 selection:text-neutral-950">
     <main class="grow">
