@@ -164,7 +164,6 @@ function sendWhatsAppRequest(perfume: Perfume) {
         </button>
       </div>
 
-      <!-- Botón Volver al inicio: Centrado -->
       <a
         href="/"
         class="inline-flex cursor-pointer items-center justify-center rounded border border-neutral-800 bg-neutral-900/80 px-4 py-2 text-xs font-bold text-neutral-400 transition-colors duration-200 hover:border-orange-500 hover:text-orange-400 lg:ml-auto">
