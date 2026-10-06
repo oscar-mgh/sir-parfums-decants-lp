@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import WhatsAppContact from '../components/WhatsAppContact.vue';
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER;
 
 interface Props {
   title?: string;
@@ -125,6 +126,9 @@ const schemaData = {
     <main class="grow">
       <slot />
     </main>
-    <WhatsAppContact client:load />
+    <WhatsAppContact
+      whatsappNumber={whatsappNumber}
+      client:load
+    />
   </body>
 </html>

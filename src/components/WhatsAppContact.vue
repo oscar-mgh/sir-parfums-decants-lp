@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const showNotice = ref(false);
+const props = defineProps<{
+  whatsappNumber: string;
+}>();
 
-const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER;
+const showNotice = ref(false);
 const message = 'Hola, quiero información sobre los decants';
-const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+const whatsappUrl = `https://wa.me/${props.whatsappNumber}?text=${encodeURIComponent(message)}`;
 
 function openWhatsApp() {
   window.open(whatsappUrl, '_blank');
   showNotice.value = true;
+
   setTimeout(() => {
     showNotice.value = false;
   }, 5000);
@@ -22,15 +26,19 @@ function openWhatsApp() {
       v-if="showNotice"
       class="flex items-center gap-3 rounded-md border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-xs text-neutral-200 shadow-xl">
       <span>Te redirigimos a WhatsApp...</span>
+
       <a
         :href="whatsappUrl"
         target="_blank"
+        rel="noopener noreferrer"
         class="cursor-pointer font-bold text-[#25D366] hover:underline">
         ¿No abrió? Haz clic aquí
       </a>
+
       <button
         @click="showNotice = false"
-        class="cursor-pointer text-neutral-400 hover:text-white">
+        class="cursor-pointer text-neutral-400 hover:text-white"
+        aria-label="Cerrar">
         ✕
       </button>
     </div>
